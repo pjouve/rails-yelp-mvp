@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   # He can see the details of a restaurant, with all the reviews related to the restaurant
   get 'restaurants/:id', to: 'restaurants#show', as: :restaurant
   # He can add a new review to a restaurant
-  get 'restaurants/:restaurant_id/reviews/new', to: 'reviews#new', as: :review_new
-  post 'restaurants/:restaurant_id/reviews', to: 'reviews#create', as: :reviews
+  resources :restaurants, only: :index do
+    resources :reviews, only: [:new, :create]
+  end
+
 end
 
 
